@@ -116,7 +116,7 @@ const UserListTable = () => {
               email={user.email}
               firstName={user.firstName}
               imageUrl={user.imageUrl}
-              lastName={user.password}
+              lastName={user.lastName}
               phoneNumber={user.phoneNumber}
             />
           ))}

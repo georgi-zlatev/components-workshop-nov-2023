@@ -1,7 +1,7 @@
 import { formatDate } from "../utils/dataUtils";
 
 const UserListItem = ({
-    fisrtName,
+    firstName,
     lastName,
     email,
     phoneNumber, 
@@ -13,11 +13,11 @@ const UserListItem = ({
       <td>
         <img
           src={imageUrl}
-          alt={`${fisrtName}'s profile`}
+          alt={`${firstName}'s profile`}
           className="image"
         />
       </td>
-      <td>{fisrtName}</td>
+      <td>{firstName}</td>
       <td>{lastName}</td>
       <td>{email}</td>
       <td>{phoneNumber}</td>
