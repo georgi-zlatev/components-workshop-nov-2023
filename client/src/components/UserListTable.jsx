@@ -1,16 +1,38 @@
 import UserListItem from "./UserListItem";
 import { useEffect, useState } from "react";
 import * as userService from "../services/userService";
+import CreateUserModal from "./CreateUserModal";
 
 const UserListTable = () => {
   const [users, setUsers] = useState([]);
+  const [showCreate, setShowCreate] = useState(false)
 
   useEffect(() => {
-    userService.getAll().then((result) => setUsers(result));
+    userService.getAll()
+    .then((result) => setUsers(result))
+    .catch(err => console.log(err))
   }, []);
+
+  const createUserClickHandler = () => {
+    setShowCreate(true)
+  }
+
+  const hideCreateUserModal = () => {
+    setShowCreate(false)
+  }
+
+  const userCreateHandler = async (e) => {
+    e.preventDefault()
+
+    const data = Object.fromEntries(new FormData(e.currentTarget))
+    const result = await userService.create(data)
+
+    setShowCreate(false)
+  }
 
   return (
     <div className="table-wrapper">
+      {showCreate && (<CreateUserModal onClose={hideCreateUserModal} onUserCreate={userCreateHandler}/>)}
       <table className="table">
         <thead>
           <tr>
@@ -122,6 +144,9 @@ const UserListTable = () => {
           ))}
         </tbody>
       </table>
+      <button className="btn-add btn" onClick={createUserClickHandler}>Add new user</button>
+
+      
     </div>
   );
 };
